@@ -1,0 +1,869 @@
+/* ============================================
+   UNIT CONVERTER WEBSITE - MAIN STYLESHEET
+   ============================================
+   
+   This file contains all styling for the unit converter website.
+   Organized into logical sections for easy modification.
+   
+   Color Variables (at top) - Modify these to change the entire theme
+   Fonts and Typography
+   Layout and Structure
+   Components (Header, Buttons, Forms, etc.)
+   Responsive Design (Mobile, Tablet, Desktop)
+   Animations and Effects
+   
+   ============================================ */
+
+/* ===== CSS VARIABLES - COLOR THEME ===== */
+/* 
+   Modify these variables to change the entire color scheme of the website.
+   This is the easiest way to customize colors without editing all the CSS.
+*/
+:root {
+    /* Primary brand colors */
+    --primary: #6366f1;           /* Main brand color (Indigo) */
+    --primary-dark: #4f46e5;      /* Darker shade for hover effects */
+    
+    /* Secondary colors for accents */
+    --secondary: #ec4899;         /* Pink - for complementary accents */
+    --accent: #f59e0b;            /* Amber/Gold - for highlights */
+    --success: #10b981;           /* Green - for success states */
+    --danger: #ef4444;            /* Red - for errors/warnings */
+    
+    /* Neutral colors for backgrounds and text */
+    --bg-light: #f8fafc;          /* Light background for sections */
+    --bg-white: #ffffff;          /* Pure white background */
+    --text-dark: #1e293b;         /* Dark text for readability */
+    --text-muted: #64748b;        /* Muted gray for secondary text */
+    --border: #e2e8f0;            /* Light border color */
+}
+
+/* ===== GLOBAL STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;       /* Include padding/border in element size */
+}
+
+html {
+    scroll-behavior: smooth;      /* Smooth scrolling for navigation */
+}
+
+body {
+    /* Font stack - uses system fonts for best performance */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Vibrant gradient background */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    
+    min-height: 100vh;            /* Full viewport height */
+    color: var(--text-dark);      /* Default text color */
+    padding: 20px;                /* Space around content */
+}
+
+/* ===== CONTAINER ===== */
+/* Main container for all content - limits max width for readability */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* ===== HEADER STYLES ===== */
+/* Main page header with title and description */
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  /* Slight shadow for depth */
+    letter-spacing: -1px;         /* Slightly tighter letter spacing */
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    margin-bottom: 5px;
+}
+
+header .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* ===== SEARCH SECTION ===== */
+/* Container for search input and results */
+.search-section {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Flex wrapper for search input and button */
+.search-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Search input field styling */
+.search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;  /* Smooth transition for focus state */
+}
+
+/* Focus state for accessibility - shows visual feedback */
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);  /* Subtle glow effect */
+}
+
+/* Search results dropdown - hidden by default */
+.search-results {
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;             /* Scroll if too many results */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-light);
+}
+
+/* Show results when class is added by JavaScript */
+.search-results.active {
+    display: block;
+}
+
+/* Individual search result item */
+.search-result-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+}
+
+/* Hover effect on search results */
+.search-result-item:hover {
+    background: var(--bg-white);
+}
+
+/* Category label inside search results */
+.search-result-category {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ===== QUICK CONVERTERS SECTION ===== */
+/* Main converter section with input fields */
+.quick-section {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.quick-section h2 {
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.quick-title {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* ===== CATEGORY TABS ===== */
+/* Horizontal tabs for switching between converters */
+.category-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    overflow-x: auto;             /* Horizontal scroll on mobile */
+    padding-bottom: 10px;
+}
+
+/* Individual category tab button */
+.category-tab {
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 25px;           /* Pill-shaped buttons */
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;           /* Prevent text wrapping */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Hover state for category tabs */
+.category-tab:hover {
+    background: var(--bg-white);
+    color: var(--primary);
+}
+
+/* Active tab styling - shows which converter is selected */
+.category-tab.active {
+    background: var(--bg-white);
+    color: var(--primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== CONVERTER INPUT ROW ===== */
+/* Main layout for From/Swap/To conversion interface */
+.converter-row {
+    display: grid;
+    grid-template-columns: 1fr 50px 1fr;  /* Fixed size for swap button */
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 25px;
+    scroll-margin-top: 20px;      /* Smooth scroll margin for jumping to this element */
+}
+
+/* ===== INPUT GROUPS ===== */
+/* Container for label + input/select */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels for input fields */
+.input-group label {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Wrapper for input and select to sit side by side */
+.input-wrapper {
+    display: flex;
+    gap: 8px;
+    min-width: 0;  /* Allow flex to work properly */
+}
+
+/* Input field styling (number inputs) */
+.input-wrapper input {
+    flex: 1;
+    padding: 12px 12px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    min-width: 0;  /* Allow proper shrinking */
+    width: 100%;   /* Take full available space */
+}
+
+/* Focus state for inputs - shows which field is active */
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Select dropdown styling */
+.input-wrapper select {
+    padding: 12px 10px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: var(--bg-white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 90px;
+    max-width: 120px;
+    color: var(--text-dark);
+    flex-shrink: 0;
+}
+
+/* Focus state for select dropdowns */
+.input-wrapper select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* ===== SWAP BUTTON ===== */
+/* Button to swap From/To units and values */
+.swap-btn {
+    padding: 0;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));  /* Gradient background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    height: 48px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;  /* Don't shrink on small screens */
+    min-width: 50px;  /* Maintain minimum width */
+}
+
+/* Hover effect - enlarges slightly */
+.swap-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* ===== COMMON CONVERSIONS SECTION ===== */
+/* Section showing popular conversions for current converter */
+.common-section {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.common-section h3 {
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Grid of common conversion links */
+.common-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+/* Individual common conversion link/button */
+.common-link {
+    padding: 15px 18px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 100%);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 50px;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Hover effect - fills with gradient color */
+.common-link:hover {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    transform: translateY(-4px);   /* Lifts up on hover */
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* ===== CONVERTER CATEGORIES SECTION ===== */
+/* Section showing all converters organized by category */
+.converters-grid {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.converters-grid h3 {
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Grid of converter cards */
+.converter-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* Individual converter card */
+.converter-card {
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    min-height: 70px;
+}
+
+/* Hover effect on converter cards */
+.converter-card:hover {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    border-color: transparent;
+}
+
+/* ===== ABOUT SECTION ===== */
+/* Educational information section */
+.about-section {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.about-section h3 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Paragraph styling in about section */
+.about-section p {
+    color: var(--text-muted);
+    line-height: 1.8;             /* More spacious line height for readability */
+    margin-bottom: 15px;
+}
+
+/* ===== FOOTER ===== */
+/* Bottom section with links and copyright */
+footer {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);  /* Glass-morphism effect */
+    margin-top: 60px;
+}
+
+/* Footer links styling */
+footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+/* Hover effect on footer links */
+footer a:hover {
+    opacity: 0.8;
+}
+
+/* Container for footer links */
+.footer-links {
+    margin-bottom: 15px;
+}
+
+/* Spacing for individual footer links */
+.footer-links a {
+    margin: 0 15px;
+}
+
+/* Copyright text styling */
+.footer-copyright {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ===== UTILITY CLASSES ===== */
+/* Info text below converter (shows conversion result) */
+.info-text {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 100%);
+    border-left: 4px solid var(--primary);
+    border-radius: 4px;
+    font-weight: 500;
+    min-height: 20px;
+}
+
+/* Loading indicator (if needed in future) */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Small badge for tagging information */
+.badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Highlight animation - brief yellow flash when something changes */
+.highlight {
+    animation: highlight 0.5s ease;
+}
+
+/* ===== ANIMATIONS ===== */
+/* Spinning animation for loading indicators */
+@keyframes spin {
+    to { 
+        transform: rotate(360deg); 
+    }
+}
+
+/* Yellow to transparent flash animation */
+@keyframes highlight {
+    0% { 
+        background-color: #fef3c7; 
+    }
+    100% { 
+        background-color: transparent; 
+    }
+}
+
+/* ===== RESPONSIVE DESIGN - TABLET (768px and below) ===== */
+@media (max-width: 768px) {
+    /* Smaller header on tablet */
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    /* Converter inputs - keep side by side but more compact */
+    .converter-row {
+        grid-template-columns: 1fr 45px 1fr;  /* Smaller gap */
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    /* Compact swap button on tablet */
+    .swap-btn {
+        height: 45px;
+        width: 45px;
+        font-size: 1.1rem;
+        min-width: 45px;
+    }
+
+    /* Adjust input group for tablet */
+    .input-group label {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .input-wrapper input {
+        padding: 10px 10px;
+        font-size: 0.95rem;
+    }
+
+    .input-wrapper select {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+        min-width: 75px;
+        max-width: 110px;
+    }
+
+    /* Smaller grid for common conversions */
+    .common-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    /* Smaller grid for converter cards */
+    .converter-links {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    /* Category tabs - allow scrolling */
+    .category-tabs {
+        overflow-x: auto;
+        gap: 8px;
+    }
+
+    .category-tab {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+
+    /* Reduced padding on tablet */
+    .quick-section,
+    .common-section,
+    .converters-grid,
+    .about-section {
+        padding: 25px 20px;
+    }
+
+    .search-section {
+        padding: 20px 20px;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN - SMALL PHONES (600px and below) ===== */
+@media (max-width: 600px) {
+    /* Compact header for phones */
+    header h1 {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    header .subtitle {
+        font-size: 0.85rem;
+    }
+
+    /* Tighter spacing on mobile */
+    body {
+        padding: 12px;
+    }
+
+    /* Converter row - stack on very small phones OR keep compact */
+    .converter-row {
+        grid-template-columns: 1fr 42px 1fr;  /* Even smaller on phones */
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .swap-btn {
+        height: 42px;
+        width: 42px;
+        font-size: 1rem;
+        min-width: 42px;
+        padding: 0;
+    }
+
+    /* Compact inputs on phone */
+    .input-group label {
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+    }
+
+    .input-wrapper {
+        gap: 6px;
+    }
+
+    .input-wrapper input {
+        padding: 9px 8px;
+        font-size: 0.9rem;
+    }
+
+    .input-wrapper select {
+        padding: 9px 6px;
+        font-size: 0.85rem;
+        min-width: 70px;
+        max-width: 100px;
+    }
+
+    /* Reduce section padding */
+    .quick-section,
+    .common-section,
+    .search-section {
+        padding: 15px;
+    }
+
+    .converters-grid,
+    .about-section {
+        padding: 15px;
+    }
+
+    /* Single column grids on phone */
+    .converter-links {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .common-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    /* Smaller cards on phone */
+    .converter-card {
+        padding: 15px 15px;
+        font-size: 0.9rem;
+    }
+
+    .common-link {
+        padding: 12px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* Smaller headings */
+    .quick-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .common-section h3,
+    .converters-grid h3,
+    .about-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .quick-title {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    /* Category tabs on phone */
+    .category-tabs {
+        gap: 6px;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+    }
+
+    .category-tab {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Search input on phone */
+    .search-input {
+        padding: 12px 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Footer on phone */
+    footer {
+        padding: 20px 15px;
+        margin-top: 30px;
+    }
+
+    .footer-links a {
+        margin: 0 8px;
+        font-size: 0.9rem;
+    }
+
+    .footer-copyright {
+        font-size: 0.85rem;
+        margin-top: 10px;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN - EXTRA SMALL PHONES (380px and below) ===== */
+@media (max-width: 380px) {
+    /* Minimum sized header */
+    header h1 {
+        font-size: 1.2rem;
+        margin-bottom: 3px;
+    }
+
+    header p {
+        font-size: 0.85rem;
+    }
+
+    header .subtitle {
+        font-size: 0.8rem;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    /* Very compact converter row */
+    .converter-row {
+        grid-template-columns: 1fr 38px 1fr;
+        gap: 4px;
+    }
+
+    .swap-btn {
+        height: 38px;
+        width: 38px;
+        font-size: 0.9rem;
+    }
+
+    .input-wrapper input {
+        padding: 8px 6px;
+        font-size: 0.85rem;
+    }
+
+    .input-wrapper select {
+        padding: 8px 4px;
+        font-size: 0.8rem;
+        min-width: 60px;
+        max-width: 90px;
+    }
+
+    .input-group label {
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+    }
+
+    .quick-section,
+    .common-section,
+    .search-section,
+    .converters-grid,
+    .about-section {
+        padding: 12px;
+    }
+
+    .quick-section h2 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .common-section h3,
+    .converters-grid h3,
+    .about-section h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .converter-card {
+        padding: 12px 10px;
+        font-size: 0.85rem;
+    }
+
+    .common-link {
+        padding: 10px 10px;
+        font-size: 0.85rem;
+    }
+}
